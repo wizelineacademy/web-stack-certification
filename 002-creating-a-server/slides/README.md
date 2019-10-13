@@ -15,15 +15,11 @@ This can help a lot to on-board new people or save demo presentations.
 - installation
 
 ```bash
-yarn
-# or
 npm install
 ```
 
 - run the slides
 
 ```bash
-yarn dev
-# or
 npm run dev
 ```
