@@ -1,5 +1,6 @@
 {
     "pastor": {
+      "id": "pastor",
       "price": 10,
       "image": "/img/tacos/pastor.jpg",
       "name": "Tacos al Pastor",
@@ -7,6 +8,7 @@
       "type": "meat"
     },
     "capeado": {
+      "id": "capeado",
       "price": 26,
       "image": "/img/tacos/capeado.jpg",
       "name": "Tacos de Camarón capeados",
@@ -14,6 +16,7 @@
       "type": "sea"
     },
     "bisteck": {
+      "id": "bisteck",
       "price": 10,
       "image": "/img/tacos/bisteck.jpg",
       "name": "Tacos de Bisteck",
@@ -21,6 +24,7 @@
       "type": "meat"
     },
     "aguacate": {
+      "id": "aguacate",
       "price": 30,
       "image": "/img/tacos/aguacate.jpg",
       "name": "Tacos de Aguacate",
@@ -28,6 +32,7 @@
       "type": "vegetarian"
     },
     "tripa": {
+      "id": "tripa",
       "price": 12,
       "image": "/img/tacos/tripa.jpg",
       "name": "Tacos de Tripa",
@@ -35,20 +40,23 @@
       "type": "meat"
     },
     "atun": {
-        "price": 20,
-        "image": "/img/tacos/atun.jpg",
-        "name": "Tacos de Atún",
-        "details": "pura proteína",
-        "type": "sea"
+      "id": "atun",
+      "price": 20,
+      "image": "/img/tacos/atun.jpg",
+      "name": "Tacos de Atún",
+      "details": "pura proteína",
+      "type": "sea"
     },
     "camaron": {
-        "price": 23,
-        "image": "/img/tacos/camaron.jpg",
-        "name": "Tacos de Camaron frito",
-        "details": "directo del mar",
-        "type": "sea"
+      "id": "camaron",
+      "price": 23,
+      "image": "/img/tacos/camaron.jpg",
+      "name": "Tacos de Camaron frito",
+      "details": "directo del mar",
+      "type": "sea"
     },
     "jamaica": {
+        "id": "jamaica",
         "price": 23,
         "image": "/img/tacos/jamaica.jpg",
         "name": "Tacos de Jamaica",
@@ -56,6 +64,7 @@
         "type": "vegetarian"
     },
     "nopales": {
+        "id": "nopales",
         "price": 23,
         "image": "/img/tacos/nopales.jpg",
         "name": "Tacos de Nopales",
@@ -63,6 +72,7 @@
         "type": "vegetarian"
     },
     "pato": {
+        "id": "pato",
         "price": 23,
         "image": "/img/tacos/pato.jpg",
         "name": "Tacos de Pato",
@@ -70,6 +80,7 @@
         "type": "sea"
     },
     "pay": {
+        "id": "pay",
         "price": 23,
         "image": "/img/tacos/pay.jpg",
         "name": "Tacos de Pay de manzana",
@@ -77,6 +88,7 @@
         "type": "vegetarian"
     },
     "picania": {
+        "id": "picania",
         "price": 23,
         "image": "/img/tacos/picania.jpg",
         "name": "Tacos de Picanha",

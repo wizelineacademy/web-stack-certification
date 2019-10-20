@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function getTacos(callback) {
+function getTacosRaw(callback) {
   fs.readFile('./data/tacos.json', (err, data) => {
     if (err) {
       throw err;
@@ -10,8 +10,14 @@ function getTacos(callback) {
   });
 }
 
+function getTacos(callback) {
+  getTacosRaw((tacos) => {
+    callback(Object.values(tacos));
+  });
+}
+
 function getById(id, callback) {
-  getTacos((data) => {
+  getTacosRaw((data) => {
     callback(data[id]);
   });
 }
