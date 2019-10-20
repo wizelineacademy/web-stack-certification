@@ -35,7 +35,7 @@ const renderTacos = (tacos) => {
     imageNode.src = currentTaco.image;
     imageNode.alt = currentTaco.name;
     detailsNode.innerHTML = currentTaco.details;
-    priceNode.innerHTML = currentTaco.price;
+    priceNode.innerHTML = `$${currentTaco.price}`;
     menuList.appendChild(newTaco);
   });
 };

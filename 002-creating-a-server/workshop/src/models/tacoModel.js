@@ -1,39 +1,24 @@
-const tacos = {
-  pastor: {
-    price: 10,
-    image: '/img/tacos/pastor.jpg',
-    name: 'Tacos al Pastor',
-    details: 'con piña',
-  },
-  camaron: {
-    price: 26,
-    image: '/img/tacos/camaron.jpg',
-    name: 'Tacos de Camarón',
-    details: 'estilo Baja California',
-  },
-  bisteck: {
-    price: 10,
-    image: '/img/tacos/bisteck.jpg',
-    name: 'Tacos de Bisteck',
-    details: 'de las mejores vacas',
-  },
-  aguacate: {
-    price: 30,
-    image: '/img/tacos/aguacate.jpg',
-    name: 'Tacos de Aguacate',
-    details: 'para el hipster',
-  },
-  tripa: {
-    price: 12,
-    image: '/img/tacos/tripa.jpg',
-    name: 'Tacos de Tripa',
-    details: 'bien dorada',
-  },
-};
+const fs = require('fs');
+
+function getTacos(callback) {
+  fs.readFile('./data/tacos.json', (err, data) => {
+    if (err) {
+      throw err;
+    }
+    const tacos = JSON.parse(data);
+    callback(tacos);
+  });
+}
+
+function getById(id, callback) {
+  getTacos((data) => {
+    callback(data[id]);
+  });
+}
 
 const tacoModel = {
-  all: () => tacos,
-  byId: (id) => tacos[id],
+  all: getTacos,
+  byId: getById,
 };
 
 module.exports = tacoModel;
