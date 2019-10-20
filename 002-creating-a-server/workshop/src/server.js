@@ -1,21 +1,19 @@
 const express = require('express');
+const logMiddleware = require('./middlewares/logMiddleware');
+const validateTacos = require('./middlewares/validateTacos');
+const tacoRoutes = require('./routes/tacoRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 const app = express();
 
-const logMiddleware = require('./middlewares/logMiddleware');
-const validateTacos = require('./middlewares/validateTacos');
-
-const tacoController = require('./controllers/tacoController');
-const orderController = require('./controllers/orderController');
-
-// global middlewares
+// middlewares
 app.use(express.json());
 app.use(logMiddleware);
 
-app.use('/api/taco', tacoController);
+app.use('/api/taco', tacoRoutes);
 
 app.use('/api/order', validateTacos);
-app.use('/api/order', orderController);
+app.use('/api/order', orderRoutes);
 
 // hello world API
 app.get('/api', (req, res) => {

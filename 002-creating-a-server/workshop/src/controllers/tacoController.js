@@ -1,10 +1,6 @@
-const express = require('express');
-
-const router = express.Router();
-
 const tacoModel = require('../models/tacoModel');
 
-router.get('/', (req, res) => {
+const get = (req, res) => {
   const { type } = req.query;
 
   tacoModel.all((allTacos) => {
@@ -23,9 +19,9 @@ router.get('/', (req, res) => {
     });
     res.send(result);
   });
-});
+};
 
-router.get('/:id', (req, res) => {
+const getById = (req, res) => {
   const { id } = req.params;
   tacoModel.byId(id, (taco) => {
     if (!taco) {
@@ -34,6 +30,6 @@ router.get('/:id', (req, res) => {
     }
     res.send(taco);
   });
-});
+};
 
-module.exports = router;
+module.exports = { get, getById };
