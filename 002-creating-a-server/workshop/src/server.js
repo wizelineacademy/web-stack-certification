@@ -4,36 +4,32 @@ const validateTacos = require('./middlewares/validateTacos');
 const tacoRoutes = require('./routes/tacoRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 
-const app = express();
+class Server {
+  constructor() {
+    this.app = express();
+    this.setupMiddlewares();
+    this.setupControllers();
+  }
 
-// middlewares
-app.use(express.json());
-app.use(logMiddleware);
+  setupMiddlewares() {
+    this.app.use(express.json());
+    this.app.use(logMiddleware);
+    this.app.use('/api/order', validateTacos);
+  }
 
-app.use('/api/taco', tacoRoutes);
+  setupControllers() {
+    this.app.use('/api/taco', tacoRoutes);
+    this.app.use('/api/order', orderRoutes);
+    // static assets in public folder
+    this.app.use(express.static('public'));
+  }
 
-app.use('/api/order', validateTacos);
-app.use('/api/order', orderRoutes);
-
-// hello world API
-app.get('/api', (req, res) => {
-  res.send({ message: 'Hello world from API!' });
-});
-
-app.post('/api', (req, res) => {
-  console.info('req.body:', req.body);
-  const { name } = req.body;
-  res.send({ message: `Hi ${name}!` });
-});
-app.use(express.static('public'));
-
-const server = {
-  start: () => {
-    const serverInstance = app.listen(3000, () => {
+  start() {
+    const serverInstance = this.app.listen(3000, () => {
       const { port } = serverInstance.address();
       console.info(`Server running at http://localhost:${port}`);
     });
-  },
-};
+  }
+}
 
-module.exports = server;
+module.exports = Server;

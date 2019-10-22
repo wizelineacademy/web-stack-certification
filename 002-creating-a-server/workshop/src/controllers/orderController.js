@@ -1,42 +1,49 @@
-const orderModel = require('../models/orderModel');
+const OrderModel = require('../models/OrderModel');
 
-const get = (req, res) => {
-  res.send(orderModel.all());
-};
+class OrderController {
+  constructor() {
+    this.orderModel = new OrderModel();
 
-const getById = (req, res) => {
-  const { id } = req.params;
-  const taco = orderModel.byId(id);
-  if (!taco) {
-    res.status(404);
-    res.send({ message: 'not found' });
+    // bind methods to this class
+    this.get = this.get.bind(this);
+    this.getById = this.getById.bind(this);
+    this.post = this.post.bind(this);
+    this.put = this.put.bind(this);
+    this.remove = this.remove.bind(this);
   }
-  res.send(taco);
-};
 
-const post = (req, res) => {
-  const order = req.body;
-  const id = orderModel.save(order);
-  res.send({ id, saved: true });
-};
+  get(req, res) {
+    res.send(this.orderModel.all());
+  }
 
-const put = (req, res) => {
-  const { id } = req.params;
-  const order = req.body;
-  const wasUpdated = orderModel.update(id, order);
-  res.send({ updated: wasUpdated });
-};
+  getById(req, res) {
+    const { id } = req.params;
+    const taco = this.orderModel.byId(id);
+    if (!taco) {
+      res.status(404);
+      res.send({ message: 'not found' });
+    }
+    res.send(taco);
+  }
 
-const remove = (req, res) => {
-  const { id } = req.params;
-  const wasDeleted = orderModel.delete(id);
-  res.send({ deleted: wasDeleted });
-};
+  post(req, res) {
+    const order = req.body;
+    const id = this.orderModel.save(order);
+    res.send({ id, saved: true });
+  }
 
-module.exports = {
-  get,
-  getById,
-  post,
-  put,
-  remove,
-};
+  put(req, res) {
+    const { id } = req.params;
+    const order = req.body;
+    const wasUpdated = this.orderModel.update(id, order);
+    res.send({ updated: wasUpdated });
+  }
+
+  remove(req, res) {
+    const { id } = req.params;
+    const wasDeleted = this.orderModel.delete(id);
+    res.send({ deleted: wasDeleted });
+  }
+}
+
+module.exports = OrderController;

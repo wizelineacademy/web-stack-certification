@@ -1,37 +1,33 @@
-const express = require('express');
+const TacoModel = require('../models/TacoModel');
 
-const router = express.Router();
-const tacoModel = require('../models/tacoModel');
+const tacoModel = new TacoModel();
 
-router.use('/', (req, res, next) => {
+function validateTacos(req, res, next) {
   const { body } = req;
   const invalidTacosIds = [];
   const tacoIds = Object.keys(body);
-  let tacosChecked = 0;
 
   if (!tacoIds.length) {
     return next();
   }
 
   tacoIds.forEach((tacoId) => {
-    tacoModel.byId(tacoId, (taco) => {
-      if (!taco) {
-        // bad request
-        invalidTacosIds.push(tacoId);
-      }
-      tacosChecked += 1;
-
-      const allTacosChecked = tacosChecked === tacoIds.length;
-      if (allTacosChecked) {
-        const validOrder = invalidTacosIds.length === 0;
-        if (validOrder) {
-          next();
-        } else {
-          res.status(400).send({ message: `Invalid tacoIds: [ ${invalidTacosIds.join(', ')} ]` });
-        }
-      }
-    });
+    const taco = tacoModel.getById(tacoId);
+    if (!taco) {
+      // taco id doesn't exist
+      invalidTacosIds.push(tacoId);
+    }
   });
-});
 
-module.exports = router;
+  if (invalidTacosIds.length > 0) {
+    const invalidTacosList = invalidTacosIds.join(', ');
+    return res.status(400).send({
+      message: `Invalid tacoIds: [ ${invalidTacosList} ]`,
+    });
+  }
+
+  // tacos list is valid
+  return next();
+}
+
+module.exports = validateTacos;

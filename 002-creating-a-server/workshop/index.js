@@ -1,4 +1,4 @@
-const server = require('./src/server.js');
+const Server = require('./src/Server.js');
 
-console.info('App started...');
+const server = new Server();
 server.start();

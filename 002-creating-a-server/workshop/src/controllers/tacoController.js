@@ -1,44 +1,36 @@
-const tacoModel = require('../models/tacoModel');
+const TacoModel = require('../models/TacoModel');
 
-const get = (req, res) => {
-  const { type } = req.query;
-  const { host } = req.headers;
-  const { baseUrl, protocol } = req;
+class TacoController {
+  constructor() {
+    this.tacoModel = new TacoModel();
 
-  tacoModel.all((allTacos) => {
-    const tacos = allTacos.map((taco) => ({
-      ...taco,
-      links: {
-        self: `${protocol}://${host}${baseUrl}/${taco.id}`,
-      },
-    }));
+    // bind methods to this class
+    this.get = this.get.bind(this);
+    this.getById = this.getById.bind(this);
+  }
 
+  get(req, res) {
+    const { type } = req.query;
+    const allTacos = this.tacoModel.getTacos();
     if (!type) {
-      return res.send(tacos);
+      return res.send(allTacos);
     }
 
-    const filteredTacos = tacos
-      .filter((taco) => taco.type === type);
+    const filteredTacos = allTacos.filter((taco) => taco.type === type);
     return res.send(filteredTacos);
-  });
-};
+  }
 
-const getById = (req, res) => {
-  const { id } = req.params;
-  const { host } = req.headers;
-  const { baseUrl, protocol } = req;
-  tacoModel.byId(id, (taco) => {
+
+  getById(req, res) {
+    const { id } = req.params;
+    const taco = this.tacoModel.byId(id);
     if (!taco) {
       res.status(404);
-      res.send({ message: 'not found' });
+      return res.send({ message: 'not found' });
     }
-    res.send({
-      ...taco,
-      links: {
-        filterByThisType: `${protocol}://${host}${baseUrl}?type=${taco.type}`,
-      },
-    });
-  });
-};
 
-module.exports = { get, getById };
+    return res.send(taco);
+  }
+}
+
+module.exports = TacoController;
