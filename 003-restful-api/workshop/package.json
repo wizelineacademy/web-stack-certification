@@ -4,10 +4,11 @@
   "description": "My first node web app",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "npm run build && node dist/index.js",
+    "dev": "nodemon --exec babel-node index.js",
     "debug": "nodemon --inspect index.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "babel src --out-dir dist"
   },
   "keywords": [
     "node",
@@ -23,6 +24,10 @@
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/preset-env": "^7.6.2"
   }
 }
