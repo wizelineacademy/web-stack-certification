@@ -1,0 +1,98 @@
+{
+    "pastor": {
+      "id": "pastor",
+      "price": 10,
+      "image": "/img/tacos/pastor.jpg",
+      "name": "Tacos al Pastor",
+      "details": "con piña",
+      "type": "meat"
+    },
+    "capeado": {
+      "id": "capeado",
+      "price": 26,
+      "image": "/img/tacos/capeado.jpg",
+      "name": "Tacos de Camarón capeados",
+      "details": "estilo Baja California",
+      "type": "sea"
+    },
+    "bisteck": {
+      "id": "bisteck",
+      "price": 10,
+      "image": "/img/tacos/bisteck.jpg",
+      "name": "Tacos de Bisteck",
+      "details": "de las mejores vacas",
+      "type": "meat"
+    },
+    "aguacate": {
+      "id": "aguacate",
+      "price": 30,
+      "image": "/img/tacos/aguacate.jpg",
+      "name": "Tacos de Aguacate",
+      "details": "para el hipster",
+      "type": "vegetarian"
+    },
+    "tripa": {
+      "id": "tripa",
+      "price": 12,
+      "image": "/img/tacos/tripa.jpg",
+      "name": "Tacos de Tripa",
+      "details": "bien dorada",
+      "type": "meat"
+    },
+    "atun": {
+      "id": "atun",
+      "price": 20,
+      "image": "/img/tacos/atun.jpg",
+      "name": "Tacos de Atún",
+      "details": "pura proteína",
+      "type": "sea"
+    },
+    "camaron": {
+      "id": "camaron",
+      "price": 23,
+      "image": "/img/tacos/camaron.jpg",
+      "name": "Tacos de Camaron frito",
+      "details": "directo del mar",
+      "type": "sea"
+    },
+    "jamaica": {
+        "id": "jamaica",
+        "price": 23,
+        "image": "/img/tacos/jamaica.jpg",
+        "name": "Tacos de Jamaica",
+        "details": "deliciosos con un agua de... horchata",
+        "type": "vegetarian"
+    },
+    "nopales": {
+        "id": "nopales",
+        "price": 23,
+        "image": "/img/tacos/nopales.jpg",
+        "name": "Tacos de Nopales",
+        "details": "saladitos y deliciosos",
+        "type": "vegetarian"
+    },
+    "pato": {
+        "id": "pato",
+        "price": 23,
+        "image": "/img/tacos/pato.jpg",
+        "name": "Tacos de Pato",
+        "details": "pruebalos con salsa de cacahuate",
+        "type": "sea"
+    },
+    "pay": {
+        "id": "pay",
+        "price": 23,
+        "image": "/img/tacos/pay.jpg",
+        "name": "Tacos de Pay de manzana",
+        "details": "sabroso postre",
+        "type": "vegetarian"
+    },
+    "picania": {
+        "id": "picania",
+        "price": 23,
+        "image": "/img/tacos/picania.jpg",
+        "name": "Tacos de Picanha",
+        "details": "puro sabor brazileiro",
+        "type": "meat"
+    }
+  }

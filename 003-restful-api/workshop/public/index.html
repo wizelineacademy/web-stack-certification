@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="./styles/index.css" rel="stylesheet">
+  <link href="./styles/font-awesome-v5.6.3-all.css" rel="stylesheet">
+  <title>Tacos</title>
+</head>
+
+<body>
+  <!-- top navigation -->
+  <nav class="font-sans bg-white text-center flex justify-between items-center my-4 mx-auto container overflow-hidden">
+    <a href="#">
+      <img src="./img/logo.png" class="h-20 ml-10" alt="logo">
+    </a>
+    <ul class="text-sm text-gray-700 list-none p-0 flex items-center">
+      <li><a href="#menu" class="inline-block py-2 px-3 text-gray-900 hover:text-gray-700 no-underline">Menú</a></li>
+      <li><a href="#testimonial" class="inline-block py-2 px-3 text-gray-900 hover:text-gray-700 no-underline">Testimonios</a></li>
+      <li><a href="#" class="inline-block py-2 px-3 text-gray-900 hover:text-gray-700 no-underline">Sucursales</a></li>
+    </ul>
+    <ul class="text-sm text-gray-700 list-none p-0 flex items-center">
+      <li>
+        <button class="bg-black hover:bg-text-gray-800 text-white ml-4 py-2 px-3">
+          Pide en línea
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- splash image with description -->
+  <section class="font-sans flex flex-col lg:flex-row">
+    <div class="w-full lg:w-1/2"><img src="./img/header.jpg" alt=""></div>
+    <div class="w-full lg:w-1/2 flex flex-col items-center justify-center text-center p-8">
+      <h1 class="my-4 font-normal">Los mejores de la ciudad!</h1>
+      <p class="leading-normal mb-4 w-2/3 text-gray-700">Si existe y es comestible, nosotros lo ponemos en una tortilla.</p>
+    </div>
+  </section>
+  
+  <!-- taco filters -->
+  <section id="menu" class="bg-white py-4 font-sans">
+    <div class="container m-auto max-w-xl flex items-baseline justify-start border-b-2 border-gray-300 mb-10">
+      <h2 class="text-base font-bold tracking-wide uppercase py-4 px-6 border-b-2 border-black -mb-4">Todos</h2>
+    <h2 class="text-gray-700 text-base font-bold tracking-wide uppercase py-4 px-6">Carne</h2>
+    <h2 class="text-gray-700 text-base font-bold tracking-wide uppercase py-4 px-6">Del Mar</h2>
+    <h2 class="text-gray-700 text-base font-bold tracking-wide uppercase py-4 px-6">Vegetarianos</h2>
+    </div>
+  </section>
+  
+  <!-- taco list -->
+  <section class="bg-white py-4 font-sans">
+    <div class="js-menu container max-w-xl m-auto flex flex-wrap items-center justify-start">
+
+      <div class="js-menu--item w-full md:w-1/2 lg:w-1/3 flex flex-col mb-8 px-3">
+        <div class="overflow-hidden bg-white rounded-lg shadow hover:shadow-raised hover:translateY-2px transition">
+          <img class="js-menu--item-image object-cover w-full h-48" src="./img/tacos/pastor.jpg" alt="taco">
+          <div class="p-6 flex flex-col justify-between ">
+            <h3 class="js-menu--item-name font-medium text-gray-900 mb-4 leading-normal">Desktop Publishing Software like Aldus PageMaker
+            </h3>
+            <p class="js-menu--item-details inline-flex items-center">
+              Details
+            </p>
+            <p class="inline-flex items-center">
+              <span class="js-menu--item-price text-gray-700 text-sm">$10</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  
+  <!-- clients testimonial -->
+  <section id="testimonial" class="font-sans container m-auto text-center py-8">
+    <label for="tagline" class="uppercase tracking-wide font-bold text-gray-700">Testimonios</label>
+    <h1 class="mt-2 mb-4 font-medium max-w-sm m-auto">Lo que dicen nuestros clientes:</h1>
+    <hr class="border-b w-8 m-auto my-6">
+    <div class="flex flex-wrap justify-between items-start">
+      <div class="w-full sm:w-1/2 md:w-1/4 flex flex-col items-center justify-center p-4">
+        <div class="overflow-hidden w-16 h-16 rounded-full mr-4 bg-gray-300">
+          <img class="object-cover w-full h-14" src="./img/tacos/pastor.jpg" alt="José">
+        </div>
+        <h2 class="my-4 font-medium">José</h2>
+        <p class="leading-normal mb-4 text-gray-700">Claro que están buenos los tacos, yo los hago.</p>
+      </div>
+      <div class="w-full sm:w-1/2 md:w-1/4 flex flex-col items-center justify-center p-4">
+        <div class="w-16 h-16 rounded-full mr-4 bg-gray-300" alt=""></div>
+        <h2 class="my-4 font-medium">Vivamus vestibulum ntulla nec ante.</h2>
+        <p class="leading-normal mb-4 text-gray-700">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      <div class="w-full sm:w-1/2 md:w-1/4 flex flex-col items-center justify-center p-4">
+        <div class="w-16 h-16 rounded-full mr-4 bg-gray-300" alt=""></div>
+        <h2 class="my-4 font-medium">Praesent placerat risus quis eros.</h2>
+        <p class="leading-normal mb-4 text-gray-700">Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
+      </div>
+      <div class="w-full sm:w-1/2 md:w-1/4 flex flex-col items-center justify-center p-4">
+        <div class="w-16 h-16 rounded-full mr-4 bg-gray-300" alt=""></div>
+        <h2 class="my-4 font-medium">Fusce pellentesque suscipit nibh.</h2>
+        <p class="leading-normal mb-4 text-gray-700">Praesent dapibus, neque id cursus faucibus, tortor neque egestas auguae, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer navigation -->
+  <footer class="font-sans bg-black text-white py-8 px-4">
+    <div class="mx-auto max-w-xl overflow-hidden flex justify-between items-center">
+      <ul class="text-sm text-gray-700 list-none p-0 flex items-center">
+        <li> 
+          <a href="/" class="block mr-4 w-32">
+            <img src="./img/logo.png" class="" alt="logo">
+          </a>
+        </li>
+        <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-gray-500-light no-underline">Product</a></li>
+        <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-gray-500-light no-underline">Company</a></li>
+        <li><a href="#" class="inline-block py-2 px-3 text-gray-500 hover:text-gray-500-light no-underline">FAQs</a></li>
+      </ul>
+      <p class="inline-block py-2 px-3 text-gray-700 text-xs"> ©2019 Tacos. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="./scripts/home.js"></script>
+</body>
+</html>
