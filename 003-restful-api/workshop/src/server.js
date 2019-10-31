@@ -3,6 +3,8 @@ const logMiddleware = require('./middlewares/logMiddleware');
 const validateTacos = require('./middlewares/validateTacos');
 const tacoRoutes = require('./routes/tacoRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+import models, { connectDb } from './models';
+import 'dotenv/config';
 
 class Server {
   constructor() {
@@ -25,10 +27,23 @@ class Server {
   }
 
   start() {
-    const serverInstance = this.app.listen(3000, () => {
-      const { port } = serverInstance.address();
-      console.info(`Server running at http://localhost:${port}`);
+    connectDb().then(async () => {
+      await this.clearDB();
+      const serverInstance = this.app.listen(3000, () => {
+        const { port } = serverInstance.address();
+        console.info(`Server running at http://localhost:${port}`);
+      });
     });
+  }
+
+  async clearDB() {
+    // TODO: remove existing db content
+    await Promise.all([
+    ]);
+  }
+
+  async seedDB() {
+    // TODO: create initial data
   }
 }
 
