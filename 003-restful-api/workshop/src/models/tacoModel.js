@@ -1,29 +1,26 @@
-const fs = require('fs');
+import mongoose from 'mongoose';
 
-// This class is simulating a database but it actually is only reading a file
-class TacoModel {
-  constructor() {
-    this.allTacos = {};
-    this.readData();
-  }
+const tacoSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    unique: true,
+  },
+  price: Number,
+  name: String,
+  details: String,
+  type: String,
+});
 
-  readData() {
-    fs.readFile('./data/tacos.json', (err, data) => {
-      if (err) {
-        throw err;
-      }
-      this.allTacos = JSON.parse(data);
-    });
-  }
+tacoSchema.statics.getTacos = async function() {
+  const tacos = await this.find();
+  return tacos;
+};
 
-  getTacos() {
-    // return tacos as an array
-    return Object.values(this.allTacos);
-  }
+tacoSchema.statics.getById = async function(id) {
+  const taco = await this.findOne({id: id});
+  return taco
+};
 
-  getById(id) {
-    return this.allTacos[id];
-  }
-}
+const TacoModel = mongoose.model('TacoModel', tacoSchema);
 
-module.exports = TacoModel;
+export default TacoModel;

@@ -1,3 +1,8 @@
+import mongoose from 'mongoose';
+
+const orderSchema = new mongoose.Schema({
+  
+});
 
 class OrderModel {
   constructor() {
