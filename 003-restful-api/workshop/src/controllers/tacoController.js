@@ -16,7 +16,6 @@ class TacoController {
     return res.send(filteredTacos);
   }
 
-
   async getById(req, res) {
     const { id } = req.params;
     const taco = await req.context.models.TacoModel.getById(id);
