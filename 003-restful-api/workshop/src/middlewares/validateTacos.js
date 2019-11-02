@@ -1,6 +1,4 @@
-const TacoModel = require('../models/TacoModel');
-
-function validateTacos(req, res, next) {
+async function validateTacos(req, res, next) {
   const { body } = req;
   const invalidTacosIds = [];
   const tacoIds = Object.keys(body);
@@ -9,8 +7,8 @@ function validateTacos(req, res, next) {
     return next();
   }
 
-  tacoIds.forEach((tacoId) => {
-    const taco = TacoModel.getById(tacoId);
+  tacoIds.forEach(async (tacoId) => {
+    const taco = await req.context.models.TacoModel.getById(tacoId);
     if (!taco) {
       // taco id doesn't exist
       invalidTacosIds.push(tacoId);

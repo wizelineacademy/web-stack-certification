@@ -1,10 +1,11 @@
+import 'dotenv/config';
 const express = require('express');
 const logMiddleware = require('./middlewares/logMiddleware');
 const validateTacos = require('./middlewares/validateTacos');
 const tacoRoutes = require('./routes/tacoRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 import models, { connectDb } from './models';
-import 'dotenv/config';
+import tacosJson from './data/tacos.json';
 
 class Server {
   constructor() {
@@ -15,6 +16,10 @@ class Server {
 
   setupMiddlewares() {
     this.app.use(express.json());
+    this.app.use((req, res, next) => {
+      req.context = {models};
+      next();
+    }); 
     this.app.use(logMiddleware);
     this.app.use('/api/order', validateTacos);
   }
@@ -28,7 +33,7 @@ class Server {
 
   start() {
     connectDb().then(async () => {
-      await this.clearDB();
+      await this.seedDB();
       const serverInstance = this.app.listen(3000, () => {
         const { port } = serverInstance.address();
         console.info(`Server running at http://localhost:${port}`);
@@ -36,14 +41,22 @@ class Server {
     });
   }
 
-  async clearDB() {
-    // TODO: remove existing db content
-    await Promise.all([
-    ]);
-  }
-
   async seedDB() {
-    // TODO: create initial data
+    // Seed Tacos if collection is empty 
+    let tacoCount = await models.TacoModel.countDocuments();
+    if (tacoCount == 0) {
+      try {
+        for (let key in tacosJson) {
+          if (tacosJson.hasOwnProperty(key)) {
+            await models.TacoModel.create(tacosJson[key]);
+          }
+        }
+      }
+      catch(err) {
+        console.log('Could not load the data', err);
+      }
+      
+    }
   }
 }
 
