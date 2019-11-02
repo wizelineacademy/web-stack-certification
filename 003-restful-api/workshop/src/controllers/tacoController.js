@@ -18,10 +18,9 @@ class TacoController {
     return res.send(filteredTacos);
   }
 
-
   getById(req, res) {
     const { id } = req.params;
-    const taco = req.context.models.TacoModel.byId(id);
+    const taco = req.context.models.TacoModel.getById(id);
     if (!taco) {
       res.status(404);
       return res.send({ message: 'not found' });

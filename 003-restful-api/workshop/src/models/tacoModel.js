@@ -18,7 +18,7 @@ tacoSchema.statics.getTacos = async function() {
 
 tacoSchema.statics.getById = async function(id) {
   const taco = await this.findOne({id: id});
-  return taco
+  return taco ? taco : null;
 };
 
 const TacoModel = mongoose.model('TacoModel', tacoSchema);
