@@ -8,13 +8,14 @@ class OrderController {
     this.remove = this.remove.bind(this);
   }
 
-  get(req, res) {
-    res.send(req.context.models.OrderModel.all());
+  async get(req, res) {
+    const tacos = await req.context.models.OrderModel.all();
+    res.send(tacos);
   }
 
-  getById(req, res) {
+  async getById(req, res) {
     const { id } = req.params;
-    const taco = req.context.models.OrderModel.byId(id);
+    const taco = await req.context.models.OrderModel.byId(id);
     if (!taco) {
       res.status(404);
       res.send({ message: 'not found' });
@@ -22,20 +23,20 @@ class OrderController {
     res.send(taco);
   }
 
-  post(req, res) {
+  async post(req, res) {
     const order = req.body;
     const id = req.context.models.OrderModel.save(order);
     res.send({ id, saved: true });
   }
 
-  put(req, res) {
+  async put(req, res) {
     const { id } = req.params;
     const order = req.body;
     const wasUpdated = req.context.models.OrderModel.update(id, order);
     res.send({ updated: wasUpdated });
   }
 
-  remove(req, res) {
+  async remove(req, res) {
     const { id } = req.params;
     const wasDeleted = req.context.models.OrderModel.delete(id);
     res.send({ deleted: wasDeleted });

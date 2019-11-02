@@ -8,7 +8,7 @@ const tacoRoutes = require('./routes/tacoRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 import models, { connectDb } from './models';
 import tacosJson from './data/tacos.json';
-
+import ordersJson from './data/orders.json';
 
 class Server {
   constructor() {
@@ -42,7 +42,13 @@ class Server {
   }
 
   async seedDB() {
-    // Seed Tacos if collection is empty 
+    await Promise.all([
+      this.seedTacos(),
+      this.seedOrders(),
+    ]);
+  }
+
+  async seedTacos() {
     let tacoCount = await models.TacoModel.countDocuments();
     if (tacoCount == 0) {
       try {
@@ -55,7 +61,22 @@ class Server {
       catch(err) {
         console.log('Could not load the data', err);
       }
-      
+    }
+  }
+
+  async seedOrders() {
+    let orderCount = await models.OrderModel.countDocuments();
+    if (orderCount == 0) {
+      try {
+        for (let key in ordersJson) {
+          if (ordersJson.hasOwnProperty(key)) {
+            await models.OrderModel.create(ordersJson[key]);
+          }
+        }
+      }
+      catch(err) {
+        console.log('Could not load the data', err);
+      }
     }
   }
 }

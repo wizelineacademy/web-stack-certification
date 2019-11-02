@@ -1,44 +1,45 @@
 import mongoose from 'mongoose';
 
-const orderSchema = new mongoose.Schema({
-  
+const orderDetailSchema = new mongoose.Schema({
+  tacoId: String,
+  amount: {
+    type: Number,
+    min: 1, 
+    max: 100,
+  },
 });
 
-class OrderModel {
-  constructor() {
-    this.orders = [];
-  }
+const orderSchema = new mongoose.Schema({
+  tacos: [orderDetailSchema],
+  price: Number,
+  user: String,
+  notes: String,
+});
 
-  all() {
-    console.log(this.orders);
-    return this.orders;
-  }
-
-  byId(id) {
-    return this.orders[id];
-  }
-
-  save(order) {
-    this.orders.push(order);
-    console.log(this.orders);
-    return this.orders.length - 1;
-  }
-
-  update(id, order) {
-    if (this.orders.length > id) {
-      this.orders[id] = order;
-      return true;
-    }
-    return false;
-  }
-
-  delete(id) {
-    if (this.orders.length > id) {
-      this.orders.splice(id, 1);
-      return true;
-    }
-    return false;
-  }
+orderSchema.statics.all = async function() {
+  const orders = await this.find();
+  return orders;
 }
+
+orderSchema.statics.byId = async function(id) {
+  const order = await this.findById();
+  return order;
+}
+
+orderSchema.statics.save = async function(order) {
+  const createdOrder = await this.create(order);
+  return createdOrder;
+}
+
+orderSchema.statics.update = async function(id, order) {
+
+  return false;
+}
+
+orderSchema.statics.delete = async function(id) {
+  return false;
+}
+
+const OrderModel = mongoose.model('OrderModel', orderSchema);
 
 module.exports = OrderModel;

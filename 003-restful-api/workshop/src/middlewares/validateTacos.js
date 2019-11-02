@@ -1,14 +1,19 @@
 async function validateTacos(req, res, next) {
   const { body } = req;
   const invalidTacosIds = [];
-  const tacoIds = Object.keys(body);
 
-  if (!tacoIds.length) {
+  if (! body.hasOwnProperty("length") ) {
     return next();
   }
 
-  tacoIds.forEach(async (tacoId) => {
-    const taco = await req.context.models.TacoModel.getById(tacoId);
+  const tacos = body.tacos;
+
+  if (!tacos.length) {
+    return next();
+  }
+
+  tacos.forEach(async (orderDetail) => {
+    const taco = await req.context.models.TacoModel.getById(orderDetail.tacoId);
     if (!taco) {
       // taco id doesn't exist
       invalidTacosIds.push(tacoId);
