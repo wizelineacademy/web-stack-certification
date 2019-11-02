@@ -2,7 +2,7 @@ async function validateTacos(req, res, next) {
   const { body } = req;
   const invalidTacosIds = [];
 
-  if (! body.hasOwnProperty("length") ) {
+  if (! body.hasOwnProperty("tacos") && Array.isArray(body.tacos) ) {
     return next();
   }
 
