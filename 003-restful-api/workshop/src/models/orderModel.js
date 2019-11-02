@@ -38,8 +38,15 @@ orderSchema.statics.persist = async function(order) {
 }
 
 orderSchema.statics.update = async function(id, order) {
-
-  return false;
+  try {
+    const query = {_id: id};
+    const updated = await this.findOneAndUpdate(query, order);
+    return updated ? true : false;
+  }
+  catch(err) {
+    console.log(error);
+    return false;
+  }
 }
 
 orderSchema.statics.delete = async function(id) {

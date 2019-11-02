@@ -48,7 +48,7 @@ class OrderController {
   async put(req, res) {
     const { id } = req.params;
     const order = req.body;
-    const wasUpdated = req.context.models.OrderModel.update(id, order);
+    const wasUpdated = await req.context.models.OrderModel.update(id, order);
     res.send({ updated: wasUpdated });
   }
 
