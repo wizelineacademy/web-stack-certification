@@ -1,7 +1,3 @@
-const TacoModel = require('../models/TacoModel');
-
-const tacoModel = new TacoModel();
-
 function validateTacos(req, res, next) {
   const { body } = req;
   const invalidTacosIds = [];
@@ -12,7 +8,7 @@ function validateTacos(req, res, next) {
   }
 
   tacoIds.forEach((tacoId) => {
-    const taco = tacoModel.getById(tacoId);
+    const taco = req.context.models.TacoModel.getById(tacoId);
     if (!taco) {
       // taco id doesn't exist
       invalidTacosIds.push(tacoId);

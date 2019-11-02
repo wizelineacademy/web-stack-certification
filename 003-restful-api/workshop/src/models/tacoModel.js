@@ -1,19 +1,10 @@
 const fs = require('fs');
+const tacos = require('../data/tacos.json');
 
 // This class is simulating a database but it actually is only reading a file
 class TacoModel {
   constructor() {
-    this.allTacos = {};
-    this.readData();
-  }
-
-  readData() {
-    fs.readFile('./data/tacos.json', (err, data) => {
-      if (err) {
-        throw err;
-      }
-      this.allTacos = JSON.parse(data);
-    });
+    this.allTacos = tacos;
   }
 
   getTacos() {

@@ -5,6 +5,7 @@ class OrderModel {
   }
 
   all() {
+    console.log(this.orders);
     return this.orders;
   }
 
@@ -14,6 +15,7 @@ class OrderModel {
 
   save(order) {
     this.orders.push(order);
+    console.log(this.orders);
     return this.orders.length - 1;
   }
 
