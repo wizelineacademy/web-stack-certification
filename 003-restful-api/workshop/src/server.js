@@ -1,10 +1,13 @@
 const express = require('express');
 const logMiddleware = require('./middlewares/logMiddleware');
+const modelsMiddleware = require('./middlewares/modelsMiddleware');
 const validateTacos = require('./middlewares/validateTacos');
+
 const tacoRoutes = require('./routes/tacoRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 import models, { connectDb } from './models';
 import 'dotenv/config';
+
 
 class Server {
   constructor() {
@@ -15,6 +18,7 @@ class Server {
 
   setupMiddlewares() {
     this.app.use(express.json());
+    this.app.use(modelsMiddleware); 
     this.app.use(logMiddleware);
     this.app.use('/api/order', validateTacos);
   }

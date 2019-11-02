@@ -1,4 +1,4 @@
-const TacoModel = require('../models/TacoModel');
+
 
 class TacoController {
   constructor() {
@@ -9,7 +9,7 @@ class TacoController {
 
   get(req, res) {
     const { type } = req.query;
-    const allTacos = TacoModel.getTacos();
+    const allTacos = req.context.models.TacoModel.getTacos();
     if (!type) {
       return res.send(allTacos);
     }
@@ -21,7 +21,7 @@ class TacoController {
 
   getById(req, res) {
     const { id } = req.params;
-    const taco = TacoModel.byId(id);
+    const taco = req.context.models.TacoModel.byId(id);
     if (!taco) {
       res.status(404);
       return res.send({ message: 'not found' });
