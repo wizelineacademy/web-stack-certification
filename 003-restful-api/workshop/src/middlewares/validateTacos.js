@@ -2,12 +2,11 @@ async function validateTacos(req, res, next) {
   const { body } = req;
   const invalidTacosIds = [];
 
-  if (! body.hasOwnProperty("tacos") && Array.isArray(body.tacos) ) {
+  if (! body.hasOwnProperty("tacos") || ! Array.isArray(body.tacos) ) {
     return next();
   }
 
   const tacos = body.tacos;
-
   if (!tacos.length) {
     return next();
   }
@@ -16,7 +15,7 @@ async function validateTacos(req, res, next) {
     const taco = await req.context.models.TacoModel.getById(orderDetail.tacoId);
     if (!taco) {
       // taco id doesn't exist
-      invalidTacosIds.push(tacoId);
+      invalidTacosIds.push(orderDetail.tacoId);
     }
   });
 

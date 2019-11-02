@@ -22,11 +22,17 @@ orderSchema.statics.all = async function() {
 }
 
 orderSchema.statics.byId = async function(id) {
-  const order = await this.findById();
-  return order;
+  try {
+    const order = await this.findById(id);
+    return order;
+  }
+  catch(err) {
+    console.log(err);
+    throw err;
+  }
 }
 
-orderSchema.statics.save = async function(order) {
+orderSchema.statics.persist = async function(order) {
   const createdOrder = await this.create(order);
   return createdOrder;
 }
@@ -37,7 +43,14 @@ orderSchema.statics.update = async function(id, order) {
 }
 
 orderSchema.statics.delete = async function(id) {
-  return false;
+  try {
+    const deletions = await this.deleteOne({_id: id});
+    return deletions.deletedCount > 0;
+  }
+  catch(err) {
+    console.log(err);
+    return false;
+  }
 }
 
 const OrderModel = mongoose.model('OrderModel', orderSchema);

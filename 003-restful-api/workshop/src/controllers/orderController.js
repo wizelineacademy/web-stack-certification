@@ -15,18 +15,34 @@ class OrderController {
 
   async getById(req, res) {
     const { id } = req.params;
-    const taco = await req.context.models.OrderModel.byId(id);
-    if (!taco) {
+    try {
+      const order = await req.context.models.OrderModel.byId(id);
+      if (! order ) {
+        res.status(404);
+        res.send({ message: 'not found' });
+      }
+      else {
+        res.send(order);
+      }
+    }
+    catch(err) {
+      console.log(err);
       res.status(404);
       res.send({ message: 'not found' });
     }
-    res.send(taco);
   }
 
   async post(req, res) {
-    const order = req.body;
-    const id = req.context.models.OrderModel.save(order);
-    res.send({ id, saved: true });
+    try {
+      const order = req.body;
+      const createdOrder = await req.context.models.OrderModel.persist(order);
+      res.send(createdOrder);
+    }
+    catch(err) {
+      console.log(err);
+      res.status(400);
+      res.send({ message: err.message });
+    }
   }
 
   async put(req, res) {
@@ -38,7 +54,7 @@ class OrderController {
 
   async remove(req, res) {
     const { id } = req.params;
-    const wasDeleted = req.context.models.OrderModel.delete(id);
+    const wasDeleted = await req.context.models.OrderModel.delete(id);
     res.send({ deleted: wasDeleted });
   }
 }
