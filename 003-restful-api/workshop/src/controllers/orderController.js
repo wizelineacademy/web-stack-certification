@@ -36,6 +36,7 @@ class OrderController {
     try {
       const order = req.body;
       const createdOrder = await req.context.models.OrderModel.persist(order);
+      res.status(201);
       res.send(createdOrder);
     }
     catch(err) {

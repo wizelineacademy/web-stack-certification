@@ -1,0 +1,68 @@
+version: 2.1
+
+executors:
+  node-env:
+    docker:
+      - image: circleci/node:10.15.1
+      - image: mongo:3.6.12
+
+commands:
+  install-node-dependencies:
+      - restore_cache:
+          keys:
+            - v-{{ .Branch }}-{{ checksum "package.json" }}
+
+      - run:
+          name: Install dependencies if not already cached
+          command: |
+            if ! test -d ./node_modules; then npm install; fi
+
+      - save_cache:
+          key: v-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+jobs:
+  build:
+    executor: node-env
+
+    steps:
+      - checkout
+      - install-node-dependencies
+      - run:
+          name: Run the integration tests
+          shell: /bin/bash
+          command: |
+            # run every single test even if one fails and propagate the error
+            set -o pipefail
+            for dir in api_test/*/; do
+              for COLLECTION in ${dir}*postman_collection.json; do
+                  # set the COMMAND_FAILED variable to "true" in case a test suite fails
+                  if [ ! -f "${COLLECTION}" ]; then
+                    echo "No collection has been found"
+                  else
+                    COLLECTION_ENV=`ls ${dir}*postman_environment.json 2>/dev/null`
+                    if [ -z "${COLLECTION_ENV}" ]; then
+                      newman run --global-var "HOST_NAME=localhost:8000" "${COLLECTION}" -r "junit,cli" || export COMMAND_FAILED="true"
+                    else
+                      newman run -e "${COLLECTION_ENV}" --global-var "HOST_NAME=localhost:8000" "${COLLECTION}" -r "junit,cli" || export COMMAND_FAILED="true"
+                    fi
+                  fi
+                done
+            done
+
+            if [ "$COMMAND_FAILED" = "true" ]; then
+              echo "PROCESS FAILED"
+              exit 1
+            else
+              echo "PROCESS SUCCEDED"
+              exit 0
+            fi
+
+      - store_test_results:
+          path: ./newman
+          
+workflows:
+  check_and_test:
+    jobs:
+      - build
